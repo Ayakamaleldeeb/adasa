@@ -1,0 +1,102 @@
+<div class="blog-page" dir="rtl">
+  <section class="blog-content">
+    <div class="container">
+      <div class="tools">
+        <div class="search-box">
+          <input
+            type="text"
+            placeholder="ابحث في المقالات..."
+            id="blog-search"
+            [(ngModel)]="searchText"
+            (ngModelChange)="resetPage()"
+            aria-label="ابحث في المقالات"
+          />
+          <span aria-hidden="true">⌕</span>
+        </div>
+
+        <div class="categories">
+          <button
+            [class.active]="selectedCategory === 'جميع المقالات'"
+            (click)="selectCategory('جميع المقالات')"
+          >
+            جميع المقالات
+          </button>
+
+          <button
+            *ngFor="let category of categories"
+            [class.active]="selectedCategory === category"
+            (click)="selectCategory(category)"
+          >
+            {{ category }}
+          </button>
+        </div>
+      </div>
+
+      <div class="posts">
+        <article class="post-card" *ngFor="let post of visiblePosts">
+          <div class="post-info">
+            <h2>
+              <a [routerLink]="['/blog', post.slug]">
+                {{ post.title }}
+              </a>
+            </h2>
+
+            <p>
+              {{ post.excerpt }}
+            </p>
+
+            <div class="post-footer">
+              <div class="post-author">
+                <img [src]="post.author.avatar" [alt]="post.author.name" />
+                <div>
+                  <strong>{{ post.author.name }}</strong>
+                  <span>{{ post.author.role }}</span>
+                </div>
+              </div>
+              <a
+                class="post-next"
+                [routerLink]="['/blog', post.slug]"
+                [attr.aria-label]="'اقرأ ' + post.title"
+                >‹</a
+              >
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <div class="empty" *ngIf="filteredPosts.length === 0">
+        <h2>لا توجد نتائج</h2>
+        <p>جربي البحث بكلمة مختلفة.</p>
+      </div>
+
+      <nav class="pagination" *ngIf="totalPages > 1" aria-label="صفحات المقالات">
+        <button
+          type="button"
+          aria-label="الصفحة السابقة"
+          [disabled]="currentPage === 1"
+          (click)="setPage(currentPage - 1)"
+        >
+          ‹
+        </button>
+        <button
+          type="button"
+          *ngFor="let page of pages"
+          [class.active]="currentPage === page"
+          [attr.aria-current]="currentPage === page ? 'page' : null"
+          (click)="setPage(page)"
+        >
+          {{ page }}
+        </button>
+        <button
+          type="button"
+          aria-label="الصفحة التالية"
+          [disabled]="currentPage === totalPages"
+          (click)="setPage(currentPage + 1)"
+        >
+          ›
+        </button>
+      </nav>
+      <p class="page-count" *ngIf="totalPages > 1">صفحة {{ currentPage }} من {{ totalPages }}</p>
+    </div>
+  </section>
+</div>

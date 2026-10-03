@@ -1,3 +1,31 @@
 /* You can add global styles to this file, and also import other style files */
 
 @import 'tailwindcss';
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+
+  font-family:
+    Arial,
+    "Tahoma",
+    sans-serif;
+
+  color: #111;
+
+  background: #ffffff;
+}
+
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
+}

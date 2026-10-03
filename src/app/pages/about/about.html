@@ -1,0 +1,85 @@
+<div class="about-page" dir="rtl">
+  <section class="about-hero">
+    <div class="container hero-content">
+      <span class="eyebrow">من نحن <span aria-hidden="true">••</span></span>
+      <h1>مهمتنا هي <span>الإعلام والإلهام</span></h1>
+      <p>
+        مدونة متخصصة في فن التصوير الفوتوغرافي، نشارك معكم أسرار المحترفين ونصائح عملية لتطوير
+        مهاراتكم. نحن شغوفون بمشاركة المعرفة ومساعدة المصورين على تنمية مهاراتهم من خلال محتوى عالي
+        الجودة.
+      </p>
+
+      <div class="stats" aria-label="إنجازات عدسة">
+        <div><strong>+2مليون</strong><span>قارئ شهرياً</span></div>
+        <div><strong>+500</strong><span>مقالة منشورة</span></div>
+        <div><strong>+50</strong><span>كاتب خبير</span></div>
+        <div><strong>+15</strong><span>تصنيف</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="values-section">
+    <div class="container">
+      <header class="section-heading">
+        <span class="section-label">قيمنا</span>
+        <h2>المبادئ التي توجه كل ما نقوم بإنشائه</h2>
+      </header>
+
+      <div class="values-grid">
+        <article class="value-item">
+          <span class="value-icon" aria-hidden="true">✦</span>
+          <h3>الجودة أولاً</h3>
+          <p>محتوى مدروس ومكتوب بخبرة</p>
+        </article>
+        <article class="value-item">
+          <span class="value-icon" aria-hidden="true">◉</span>
+          <h3>تركيز عملي</h3>
+          <p>أمثلة واقعية يمكنك تطبيقها اليوم</p>
+        </article>
+        <article class="value-item">
+          <span class="value-icon" aria-hidden="true">◎</span>
+          <h3>المجتمع</h3>
+          <p>تعلم مع آلاف المصورين</p>
+        </article>
+        <article class="value-item">
+          <span class="value-icon" aria-hidden="true">↻</span>
+          <h3>دائماً محدث</h3>
+          <p>أحدث الاتجاهات وأفضل الممارسات</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="team-section">
+    <div class="container">
+      <header class="section-heading">
+        <span class="section-label">فريقنا</span>
+        <h2>تعرف على كتابنا</h2>
+        <p>فريقنا من المصورين والكتاب ذوي الخبرة شغوفون بمشاركة معرفتهم مع المجتمع.</p>
+      </header>
+
+      <div class="team-grid">
+        <article class="team-member" *ngFor="let author of authors">
+          <img [src]="author.avatar" [alt]="author.name" loading="lazy" />
+          <h3>{{ author.name }}</h3>
+          <p>{{ author.role }}</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact-section">
+    <div class="container contact-content">
+      <span class="section-label">نحن هنا من أجلك</span>
+      <h2>لديك أسئلة؟ دعنا نتحدث!</h2>
+      <p>
+        نحب أن نسمع منك. سواء كان لديك سؤال حول محتوانا، أو تريد المساهمة، أو تريد فقط إلقاء التحية،
+        لا تتردد في التواصل.
+      </p>
+      <div class="contact-actions">
+        <a class="contact-primary" href="mailto:hello@adasah.com">تواصل معنا</a>
+        <a class="contact-secondary" routerLink="/blog">تصفح المقالات</a>
+      </div>
+    </div>
+  </section>
+</div>

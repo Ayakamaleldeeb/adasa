@@ -1,0 +1,176 @@
+<div class="detail-page" dir="rtl" *ngIf="post as article; else missingArticle">
+  <article>
+    <header class="article-hero">
+      <img class="hero-image" [src]="article.image" [alt]="article.title" />
+      <div class="hero-shade"></div>
+      <div class="detail-container hero-content">
+        <nav class="breadcrumbs" aria-label="مسار التنقل">
+          <a routerLink="/home" aria-label="الرئيسية">الرئيسية</a>
+          <span aria-hidden="true">‹</span>
+          <a routerLink="/blog">المدونة</a>
+          <span aria-hidden="true">‹</span>
+          <a routerLink="/blog" [queryParams]="{ category: article.category }">{{
+            article.category
+          }}</a>
+        </nav>
+
+        <div class="article-meta">
+          <a
+            class="article-category"
+            routerLink="/blog"
+            [queryParams]="{ category: article.category }"
+            >{{ article.category }}</a
+          >
+          <time [attr.datetime]="article.date">{{ formattedDate }}</time>
+          <span>{{ article.readTime }}</span>
+        </div>
+
+        <h1>{{ article.title }}</h1>
+
+        <div class="hero-author">
+          <img [src]="article.author.avatar" [alt]="article.author.name" />
+          <div>
+            <strong>{{ article.author.name }}</strong>
+            <span>{{ article.author.role }}</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="detail-container article-layout">
+      <div class="article-main">
+        <blockquote>{{ article.excerpt }}</blockquote>
+
+        <div class="article-copy">
+          <ng-container *ngFor="let block of articleBlocks">
+            <h2 *ngIf="block.heading" [id]="block.id">{{ block.heading }}</h2>
+            <p *ngIf="block.body">{{ block.body }}</p>
+          </ng-container>
+        </div>
+
+        <section class="tag-section" aria-labelledby="article-tags-title">
+          <h2 id="article-tags-title">الوسوم</h2>
+          <div class="tag-list">
+            <span *ngFor="let tag of article.tags">#{{ tag }}</span>
+          </div>
+        </section>
+
+        <section class="share-section" aria-labelledby="share-title">
+          <h2 id="share-title">شارك المقال</h2>
+          <div class="share-actions">
+            <a
+              [href]="'https://www.facebook.com/sharer/sharer.php?u=' + shareUrl"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="شارك على فيسبوك"
+              >f</a
+            >
+            <a
+              [href]="'https://www.linkedin.com/sharing/share-offsite/?url=' + shareUrl"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="شارك على لينكدإن"
+              >in</a
+            >
+            <a
+              [href]="'https://twitter.com/intent/tweet?url=' + shareUrl"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="شارك على إكس"
+              >𝕏</a
+            >
+            <button
+              type="button"
+              (click)="copyArticleLink()"
+              [attr.aria-label]="copied ? 'تم نسخ الرابط' : 'انسخ رابط المقال'"
+            >
+              {{ copied ? 'تم النسخ' : 'نسخ الرابط' }}
+            </button>
+          </div>
+        </section>
+
+        <section class="author-card">
+          <img [src]="article.author.avatar" [alt]="article.author.name" />
+          <div>
+            <span>كاتب المقال</span>
+            <h2>{{ article.author.name }}</h2>
+            <p>
+              {{ article.author.role }} شغوف بمشاركة المعرفة والخبرات في عالم التصوير الفوتوغرافي.
+            </p>
+          </div>
+        </section>
+      </div>
+
+      <aside class="article-aside">
+        <section class="aside-card table-of-contents" *ngIf="headings.length">
+          <h2>محتويات المقال</h2>
+          <nav aria-label="محتويات المقال">
+            <a *ngFor="let heading of headings; let index = index" [href]="'#' + heading.id">
+              <span>{{ index + 1 }}</span>
+              {{ heading.title }}
+            </a>
+          </nav>
+        </section>
+
+        <section class="aside-card article-facts">
+          <div>
+            <strong>{{ article.readTime }}</strong
+            ><span>وقت القراءة</span>
+          </div>
+          <div>
+            <strong>{{ formattedDate }}</strong
+            ><span>تاريخ النشر</span>
+          </div>
+        </section>
+
+        <section class="aside-card subscribe-card">
+          <span class="subscribe-mark" aria-hidden="true">✉</span>
+          <h2>لا تفوّت جديدنا</h2>
+          <p>اشترك للحصول على أحدث المقالات.</p>
+          <a routerLink="/blog">تصفح المزيد <span aria-hidden="true">←</span></a>
+        </section>
+      </aside>
+    </div>
+  </article>
+
+  <section class="related-section" *ngIf="relatedPosts.length">
+    <div class="detail-container">
+      <header class="related-heading">
+        <div>
+          <span>اقتراحات لك</span>
+          <h2>مقالات قد تعجبك</h2>
+          <p>استكشف المزيد من المحتوى المميز</p>
+        </div>
+        <a routerLink="/blog">عرض الكل <span aria-hidden="true">←</span></a>
+      </header>
+
+      <div class="related-grid">
+        <a
+          class="related-card"
+          *ngFor="let related of relatedPosts"
+          [routerLink]="['/blog', related.slug]"
+        >
+          <div class="related-image">
+            <img [src]="related.image" [alt]="related.title" loading="lazy" />
+            <span>{{ related.category }}</span>
+          </div>
+          <div class="related-body">
+            <h3>{{ related.title }}</h3>
+            <div>
+              <span>{{ related.author.name }}</span
+              ><span>{{ related.readTime }}</span>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+</div>
+
+<ng-template #missingArticle>
+  <section class="missing-article" dir="rtl">
+    <h1>المقال غير موجود</h1>
+    <p>قد يكون الرابط غير صحيح أو أن المقال لم يعد متاحًا.</p>
+    <a routerLink="/blog">العودة إلى المدونة</a>
+  </section>
+</ng-template>

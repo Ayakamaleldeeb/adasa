@@ -1,0 +1,30 @@
+<nav class="navbar">
+  <div class="container navbar-container">
+    <!-- Logo -->
+    <a routerLink="/home" class="logo">
+      <img class="logo-icon" src="/logo.png" alt="" aria-hidden="true" />
+      <span class="logo-copy">
+        <strong>عدسة</strong>
+        <small>عالم التصوير الفوتوغرافي</small>
+      </span>
+    </a>
+
+    <!-- Navigation -->
+    <div class="nav-links">
+      <a routerLink="/home" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+        الرئيسية
+      </a>
+
+      <a routerLink="/blog" routerLinkActive="active"> المدونة </a>
+
+      <a routerLink="/about" routerLinkActive="active"> من نحن </a>
+    </div>
+
+    <a routerLink="/blog" fragment="blog-search" class="nav-search" aria-label="بحث المقالات">
+      ⌕
+    </a>
+
+    <!-- CTA -->
+    <a routerLink="/blog" class="nav-button"> ابدأ القراءة </a>
+  </div>
+</nav>

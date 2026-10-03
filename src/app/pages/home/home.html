@@ -1,0 +1,147 @@
+<div class="home-page" dir="rtl">
+  <section class="home-hero">
+    <div class="home-container hero-content">
+      <span class="hero-eyebrow">مرحباً بك في عدسة <span aria-hidden="true">••</span></span>
+      <h1>اكتشف فن <span>التصوير الفوتوغرافي</span></h1>
+      <p>انغمس في أسرار المحترفين ونصائح عملية لتطوير مهاراتك في التصوير.</p>
+      <div class="hero-actions">
+        <a class="action-primary" routerLink="/blog"
+          >استكشف المقالات <span aria-hidden="true">←</span></a
+        >
+        <a class="action-secondary" routerLink="/about"
+          ><span aria-hidden="true">↗</span> اعرف المزيد</a
+        >
+      </div>
+      <div class="home-stats" aria-label="إحصاءات عدسة">
+        <div><strong>+50</strong><span>مقالة</span></div>
+        <div><strong>+10ألف</strong><span>قارئ</span></div>
+        <div><strong>4</strong><span>تصنيفات</span></div>
+        <div><strong>6</strong><span>كتّاب</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="home-section featured-section">
+    <div class="home-container">
+      <header class="home-section-heading">
+        <div>
+          <span class="section-kicker">مميز</span>
+          <h2>مقالات مختارة</h2>
+          <p>محتوى منتقى لبدء رحلة تعلمك</p>
+        </div>
+        <a routerLink="/blog">عرض الكل <span aria-hidden="true">←</span></a>
+      </header>
+
+      <div class="featured-grid">
+        <article class="featured-card" *ngFor="let post of featuredPosts">
+          <a class="featured-image" [routerLink]="['/blog', post.slug]">
+            <img [src]="post.image" [alt]="post.title" loading="lazy" />
+            <span class="featured-flag">مميز</span>
+          </a>
+          <div class="featured-body">
+            <div class="featured-meta">
+              <span>{{ post.category }}</span>
+              <span>{{ post.readTime }}</span>
+            </div>
+            <h3>
+              <a [routerLink]="['/blog', post.slug]">{{ post.title }}</a>
+            </h3>
+            <p>{{ post.excerpt }}</p>
+            <div class="featured-footer">
+              <div class="home-author">
+                <img [src]="post.author.avatar" [alt]="post.author.name" loading="lazy" />
+                <div>
+                  <strong>{{ post.author.name }}</strong
+                  ><span>{{ post.date }}</span>
+                </div>
+              </div>
+              <a [routerLink]="['/blog', post.slug]"
+                >اقرأ المقال <span aria-hidden="true">←</span></a
+              >
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="home-section categories-section">
+    <div class="home-container">
+      <header class="home-section-heading">
+        <div>
+          <span class="section-kicker">التصنيفات</span>
+          <h2>استكشف حسب الموضوع</h2>
+          <p>اعثر على محتوى مصمم حسب اهتماماتك</p>
+        </div>
+      </header>
+
+      <div class="home-categories">
+        <a
+          class="home-category"
+          *ngFor="let category of categories"
+          [routerLink]="['/blog']"
+          [queryParams]="{ category: category.name }"
+        >
+          <span class="category-name">{{ category.name }}</span>
+          <span class="category-count">{{ category.count }} مقالة</span>
+          <span class="category-arrow" aria-hidden="true">←</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="home-section latest-section">
+    <div class="home-container">
+      <header class="home-section-heading">
+        <div>
+          <span class="section-kicker">الأحدث</span>
+          <h2>أحدث المقالات</h2>
+          <p>محتوى جديد طازج من المطبعة</p>
+        </div>
+        <a routerLink="/blog">عرض جميع المقالات <span aria-hidden="true">←</span></a>
+      </header>
+
+      <div class="latest-grid">
+        <article class="latest-card" *ngFor="let post of latestPosts">
+          <a class="latest-image" [routerLink]="['/blog', post.slug]">
+            <img [src]="post.image" [alt]="post.title" loading="lazy" />
+            <span>{{ post.category }}</span>
+          </a>
+          <div class="latest-body">
+            <div class="latest-meta">
+              <span>{{ post.readTime }}</span
+              ><time [attr.datetime]="post.date">{{ post.date }}</time>
+            </div>
+            <h3>
+              <a [routerLink]="['/blog', post.slug]">{{ post.title }}</a>
+            </h3>
+            <p>{{ post.excerpt }}</p>
+            <div class="latest-author">
+              <img [src]="post.author.avatar" [alt]="post.author.name" loading="lazy" />
+              <div>
+                <strong>{{ post.author.name }}</strong
+                ><span>{{ post.author.role }}</span>
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="newsletter-section">
+    <div class="home-container newsletter-content">
+      <span class="newsletter-mark" aria-hidden="true">✉</span>
+      <h2>اشترك في نشرتنا الإخبارية</h2>
+      <p>احصل على نصائح التصوير الحصرية ودروس جديدة مباشرة في بريدك الإلكتروني.</p>
+      <form class="newsletter-form" (submit)="$event.preventDefault()">
+        <input
+          type="email"
+          placeholder="أدخل بريدك الإلكتروني"
+          aria-label="أدخل بريدك الإلكتروني"
+        />
+        <button type="submit">اشترك الآن</button>
+      </form>
+    </div>
+  </section>
+</div>
